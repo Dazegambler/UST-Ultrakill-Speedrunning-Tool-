@@ -31,6 +31,8 @@ https://github.com/BepInEx/BepInEx.ConfigurationManager
 
 building it yourself might make a file called TestMod.dll. this mod was never a planned thing so i just used the mod i use to create test mods
 
+USING THIS MOD ON A ACTUAL RUN IS CONSIDERED ILLEGAL AND YOUR RUN WILL BE DISQUALIFIED
+
 # Images:
 ![ULTRAKILL 02_07_2021 15_17_02](https://user-images.githubusercontent.com/70617250/124314657-1ec11d00-db49-11eb-9130-8a59da788423.png)
 ![ULTRAKILL 02_07_2021 15_17_32](https://user-images.githubusercontent.com/70617250/124314688-28e31b80-db49-11eb-977e-d5c17df31f2d.png)
