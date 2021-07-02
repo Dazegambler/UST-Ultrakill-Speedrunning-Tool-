@@ -9,12 +9,15 @@ This mod Displays the current stats:
 
 
 
-////////Usage:////////
+////////Installing:////////
 
 Just Simply Drop the .dll to your plugin File located in:
 
 ULTRAKILL/BepInEx/plugins
 
+////////Usage:////////
+
+Simply Press Caps Lock or your selected key to show the UI
 
 
 ////////Configuration:////////
