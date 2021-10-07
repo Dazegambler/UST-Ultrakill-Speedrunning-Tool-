@@ -7,6 +7,7 @@ using BepInEx;
 using BepInEx.Logging;
 using BepInEx.Configuration;
 using UnityEngine;
+using UnityEngine.SceneManagement;
 using UnityEngine.UI;
 
 namespace TestMod
@@ -22,9 +23,8 @@ namespace TestMod
         private ConfigEntry<float> XPos;
         private ConfigEntry<float> YPos;
         private ConfigEntry<int> Font;
-        private ConfigEntry<KeyCode> Toggle;
-        GameObject Player;
-        bool Display = false;
+        Rigidbody Player;
+        bool Display;
 
         public void Start()
         {
@@ -36,18 +36,23 @@ namespace TestMod
             YAngle = Config.Bind("Angle","Y angle pos",20f,"Y pos of Player's Angle");
             XPos = Config.Bind("Pos","X position pos",0f,"X pos of Player's position");
             YPos = Config.Bind("Pos","Y position pos",40f,"Y pos of Player's position");
-            Toggle = Config.Bind("Binds", "Toggle", KeyCode.CapsLock, "Key to toggle stats");
         }
         public void Update()
         {
-            if (Player != null)
+            if(SceneManager.GetActiveScene().name != "Intro")
             {
-                if (Input.GetKeyDown(Toggle.Value))
+                if (Player != null)
                 {
-                    Display = !Display;
+                    if (Input.GetKeyDown(KeyCode.Tab))
+                    {
+                        Display = !Display;
+                    }
+                }
+                else
+                {
+                    ObjCheck();
                 }
             }
-            ObjCheck();
         }
         public void OnGUI()
         {
@@ -55,11 +60,14 @@ namespace TestMod
             {
                 if (Display)
                 {
-                    var PLA = Player.GetComponent<Rigidbody>();
                     var DSGN = new GUIStyle();
                     DSGN.fontSize = Font.Value;
                     DSGN.normal.textColor = Col.Value;
-                    GUI.Label(new Rect(XSpeed.Value, YSpeed.Value, 300, 20), "Velocity(x,y,z): " + PLA.velocity, DSGN);
+
+                    var HorSpeed = new Vector3(Player.velocity.x, 0, Player.velocity.z).magnitude;
+
+                    GUI.Label(new Rect(XSpeed.Value, YSpeed.Value, 300, 20), $"Velocity Horizontal: {HorSpeed}", DSGN);
+                    GUI.Label(new Rect(XSpeed.Value, YSpeed.Value+20, 300, 20), $"Velocity Vertical: {Player.velocity.y}", DSGN);
                     GUI.Label(new Rect(XAngle.Value, YAngle.Value, 300, 20), "Angle: " + Player.transform.eulerAngles.y, DSGN);
                     GUI.Label(new Rect(XPos.Value, YPos.Value, 300, 20), "Position(x,y,z): " + Player.transform.position, DSGN);
                 }
@@ -67,10 +75,7 @@ namespace TestMod
         }
         private void ObjCheck()
         {
-            if(Player == null)
-            {
-                Player = GameObject.Find("Player");
-            }
+            Player = NewMovement.Instance.gameObject.GetComponent<Rigidbody>();
         }
     }
 }
