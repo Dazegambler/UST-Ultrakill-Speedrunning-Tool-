@@ -18,7 +18,7 @@ ULTRAKILL/BepInEx/plugins
 
 # Usage:
 
-Simply Press Caps Lock or your selected key to show the UI
+Simply Press Tab to show the UI
 
 
 # Configuration:
